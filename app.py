@@ -42,15 +42,19 @@ if st.button("Analyze"):
                 st.subheader("🧠 GPT Summary")
                 st.markdown(summary)
 
+                
                 st.subheader("📊 Top Keywords")
-                st.pyplot(generate_insight_chart(article))
+                st.pyplot(generate_insight_chart(article_text))
 
                 st.subheader("🧠 Key Noun Phrases")
-                noun_fig = generate_noun_phrases_chart(article)
+                noun_fig = generate_noun_phrases_chart(article_text)
                 if noun_fig:
-                    st.pyplot(noun_fig)
+                   st.pyplot(noun_fig)
                 else:
-                    st.info("Not enough phrases to display.")
+                   st.info("Not enough phrases to display.")
 
                 st.subheader("☁️ Word Cloud")
-                st.pyplot(generate_wordcloud(article))
+                st.pyplot(generate_wordcloud(article_text))
+
+                st.subheader("📈 Overall Sentiment")
+                st.success(f"🧭 Sentiment: **{get_sentiment(article_text)}**")
