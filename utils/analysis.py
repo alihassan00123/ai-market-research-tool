@@ -7,7 +7,7 @@ def analyze_text_with_gpt(text):
     prompt = f"Provide a concise market research analysis for the following content:\n\n{text[:3000]}"
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=500
         )
