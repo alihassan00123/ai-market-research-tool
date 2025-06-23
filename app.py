@@ -1,7 +1,11 @@
 import streamlit as st
 from utils.scraper import extract_article_content
 from utils.analysis import analyze_text_with_gpt
-from utils.visuals import generate_insight_chart
+from utils.visuals import (
+    generate_insight_chart,
+    generate_noun_phrases_chart,
+    generate_wordcloud
+)
 
 st.set_page_config(page_title="AI Market Research Tool", layout="wide")
 st.title("📊 AI-Powered Market Research Tool")
@@ -24,20 +28,29 @@ st.markdown("""
 
 url = st.text_input("🔗 Enter article or competitor website URL:")
 
-if url:
-    with st.spinner("🔍 Extracting content..."):
-        raw_text = extract_article_content(url)
-
-    if raw_text:
-        st.subheader("📄 Extracted Content")
-        st.text_area("Content Preview", raw_text[:2000], height=200)
-
-        st.subheader("🧠 GPT-4 Market Analysis")
-        insights = analyze_text_with_gpt(raw_text)
-        st.write(insights)
-
-        st.subheader("📈 Visualization")
-        fig = generate_insight_chart(raw_text)
-        st.pyplot(fig)
+if st.button("Analyze"):
+    if not url.strip():
+        st.warning("Please enter a valid URL.")
     else:
-        st.warning("Failed to extract content from the URL. Please try another.")
+        with st.spinner("Extracting and analyzing..."):
+            article = extract_article_content(url)
+            if not article:
+                st.error("Failed to extract article content.")
+            else:
+                summary = analyze_text_with_gpt(article)
+
+                st.subheader("🧠 GPT Summary")
+                st.markdown(summary)
+
+                st.subheader("📊 Top Keywords")
+                st.pyplot(generate_insight_chart(article))
+
+                st.subheader("🧠 Key Noun Phrases")
+                noun_fig = generate_noun_phrases_chart(article)
+                if noun_fig:
+                    st.pyplot(noun_fig)
+                else:
+                    st.info("Not enough phrases to display.")
+
+                st.subheader("☁️ Word Cloud")
+                st.pyplot(generate_wordcloud(article))
