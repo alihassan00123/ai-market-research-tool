@@ -4,6 +4,8 @@ from wordcloud import WordCloud
 import spacy
 from textblob import TextBlob
 import streamlit as st
+import spacy.cli
+spacy.cli.download("en_core_web_sm")  # ✅ Safe for Streamlit Cloud
 
 # ✅ Cache and load spaCy NLP model
 @st.cache_resource
