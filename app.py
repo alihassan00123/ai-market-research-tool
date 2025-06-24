@@ -5,7 +5,7 @@ from utils.visuals import (
     generate_insight_chart,
     generate_noun_phrases_chart,
     generate_wordcloud,
-    get_sentiment  # ✅ Add this
+    get_sentiment
 )
 
 st.set_page_config(page_title="AI Market Research Tool", layout="wide")
@@ -31,12 +31,12 @@ url = st.text_input("🔗 Enter article or competitor website URL:")
 
 if st.button("Analyze"):
     if not url.strip():
-        st.warning("Please enter a valid URL.")
+        st.warning("⚠️ Please enter a valid URL.")
     else:
-        with st.spinner("Extracting and analyzing..."):
+        with st.spinner("🔄 Extracting and analyzing..."):
             article = extract_article_content(url)
             if not article:
-                st.error("Failed to extract article content.")
+                st.error("❌ Failed to extract article content.")
             else:
                 summary = analyze_text_with_gpt(article)
 
@@ -51,7 +51,7 @@ if st.button("Analyze"):
                 if noun_fig:
                     st.pyplot(noun_fig)
                 else:
-                    st.info("Not enough phrases to display.")
+                    st.info("ℹ️ Not enough phrases to display.")
 
                 st.subheader("☁️ Word Cloud")
                 st.pyplot(generate_wordcloud(article))
