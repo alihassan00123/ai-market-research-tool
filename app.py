@@ -4,7 +4,8 @@ from utils.analysis import analyze_text_with_gpt
 from utils.visuals import (
     generate_insight_chart,
     generate_noun_phrases_chart,
-    generate_wordcloud
+    generate_wordcloud,
+    get_sentiment  # ✅ Add this
 )
 
 st.set_page_config(page_title="AI Market Research Tool", layout="wide")
@@ -42,19 +43,18 @@ if st.button("Analyze"):
                 st.subheader("🧠 GPT Summary")
                 st.markdown(summary)
 
-                
                 st.subheader("📊 Top Keywords")
-                st.pyplot(generate_insight_chart(article_text))
+                st.pyplot(generate_insight_chart(article))
 
                 st.subheader("🧠 Key Noun Phrases")
-                noun_fig = generate_noun_phrases_chart(article_text)
+                noun_fig = generate_noun_phrases_chart(article)
                 if noun_fig:
-                   st.pyplot(noun_fig)
+                    st.pyplot(noun_fig)
                 else:
-                   st.info("Not enough phrases to display.")
+                    st.info("Not enough phrases to display.")
 
                 st.subheader("☁️ Word Cloud")
-                st.pyplot(generate_wordcloud(article_text))
+                st.pyplot(generate_wordcloud(article))
 
                 st.subheader("📈 Overall Sentiment")
-                st.success(f"🧭 Sentiment: **{get_sentiment(article_text)}**")
+                st.success(f"🧭 Sentiment: **{get_sentiment(article)}**")
