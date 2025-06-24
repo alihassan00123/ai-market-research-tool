@@ -1,12 +1,13 @@
-openai>=1.2.4
+# Core libraries
 streamlit
+openai>=1.2.4
 beautifulsoup4
 requests
 matplotlib
-spacy==3.5.0
+numpy
 textblob
 wordcloud
-numpy
+spacy==3.5.0
 
-# spaCy model
+# SpaCy English model (Safe method)
 en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0.tar.gz
