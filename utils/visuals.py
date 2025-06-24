@@ -64,11 +64,9 @@ def generate_noun_phrases_chart(text):
 
 # ✅ 4. Word Cloud
 def generate_wordcloud(text):
-    """
-    Generate a word cloud visualization from the input text.
-    """
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+    wc = WordCloud(width=600, height=300, background_color='white').generate(text)
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.imshow(wordcloud, interpolation='bilinear')
+    ax.imshow(wc)
     ax.axis("off")
+    plt.tight_layout()
     return fig
