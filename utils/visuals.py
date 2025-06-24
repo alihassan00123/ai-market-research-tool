@@ -5,7 +5,7 @@ import spacy
 from textblob import TextBlob
 import streamlit as st
 
-# ✅ Cache spaCy NLP model
+# ✅ Cache and load spaCy NLP model
 @st.cache_resource
 def load_nlp():
     return spacy.load("en_core_web_sm")
@@ -16,6 +16,7 @@ nlp = load_nlp()
 def get_sentiment(text):
     """
     Analyze sentiment polarity of the input text using TextBlob.
+    Returns one of: Positive, Neutral, or Negative.
     """
     blob = TextBlob(text)
     score = blob.sentiment.polarity
@@ -46,7 +47,7 @@ def generate_insight_chart(text):
 # ✅ 3. Top Noun Phrases (Bar Chart)
 def generate_noun_phrases_chart(text):
     """
-    Extract top noun phrases using spaCy and plot a bar chart.
+    Extract top noun phrases using spaCy and plot a horizontal bar chart.
     """
     doc = nlp(text)
     phrases = [chunk.text.lower() for chunk in doc.noun_chunks if len(chunk.text) > 2]
