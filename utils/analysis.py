@@ -1,7 +1,8 @@
 import openai
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Correct way to set up client using OpenAI SDK v1+
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def analyze_text_with_gpt(text):
     prompt = f"""
@@ -29,14 +30,13 @@ News text:
 \"\"\"{text[:3000]}\"\"\"
 """
 
-   try:
+    try:
         response = client.chat.completions.create(
             model="gpt-4",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=500
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=1000,
+            temperature=0.4
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"❌ Error: {str(e)}"
