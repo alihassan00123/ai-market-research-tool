@@ -3,7 +3,7 @@ openai>=1.2.4
 beautifulsoup4
 requests
 matplotlib
-numpy
+numpy==1.23.5
 textblob
 wordcloud
 spacy==3.5.0
