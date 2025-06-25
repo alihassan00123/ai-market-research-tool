@@ -1,7 +1,5 @@
 # 🧠 AI-Powered Market Research Tool
 
-# 🧠 AI-Powered Market Research Tool
-
 This project is an AI-powered market research assistant that extracts article content from URLs, analyzes it using GPT-4 or GPT-3.5, and provides visual insights like keyword charts, sentiment analysis, and word clouds — all inside a Streamlit web app.
 
 ---
