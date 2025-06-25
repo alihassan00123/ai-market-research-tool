@@ -2,18 +2,12 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from wordcloud import WordCloud
 from textblob import TextBlob
-import streamlit as st
 import spacy
-import spacy.cli
+import streamlit as st
 
-# ✅ تحميل النموذج مرة واحدة فقط إذا لم يكن موجود
 @st.cache_resource
 def load_nlp():
-    try:
-        return spacy.load("en_core_web_sm")
-    except OSError:
-        spacy.cli.download("en_core_web_sm")
-        return spacy.load("en_core_web_sm")
+    return spacy.load("en_core_web_sm")
 
 nlp = load_nlp()
 
